@@ -17,13 +17,13 @@ public class CheckoutTest {
 	@Test
 	public void checkApplesCosts60p() {
 
-		assertEquals("0.60",checkout.getTotal(new String[]{"Apple"}));
+		assertEquals("£0.60",checkout.getTotal(new String[]{"Apple"}));
 	}
 
 	@Test
 	public void checkOrangessCosts25p() {
 
-		assertEquals("0.25",checkout.getTotal(new String[]{"Orange"}));
+		assertEquals("£0.25",checkout.getTotal(new String[]{"Orange"}));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -34,11 +34,26 @@ public class CheckoutTest {
 	
 	@Test
 	public void checkSimpleBasket() {
-		assertEquals("0.85",checkout.getTotal(new String[]{"Apple","Orange"}));
+		assertEquals("£0.85",checkout.getTotal(new String[]{"Apple","Orange"}));
 	}
 
 	@Test
 	public void checkBiggerBasket() {
-		assertEquals("2.05",checkout.getTotal(new String[]{"Apple","Apple","Orange","Apple"}));
+		assertEquals("£1.45",checkout.getTotal(new String[]{"Apple","Apple","Orange","Apple"}));
+	}
+	
+	@Test
+	public void checkAppleSpecial() {
+		assertEquals("£0.60",checkout.getTotal(new String[]{"Apple","Apple"}));
+	}
+	
+	@Test
+	public void checkOrangeSpecial() {
+		assertEquals("£0.50",checkout.getTotal(new String[]{"Orange","Orange","Orange"}));
+	}
+
+	@Test
+	public void checkSpecialBasket() {
+		assertEquals("£1.10",checkout.getTotal(new String[]{"Apple","Apple","Orange","Orange","Orange"}));
 	}
 }
